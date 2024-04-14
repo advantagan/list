@@ -10,6 +10,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+    />
   </head>
   <body>
     <div class="d-flex">
@@ -22,15 +26,15 @@
       </button>
       <ul class="d-flex" style="list-style: none" id="allTaskLists"></ul>
     </div>
-    <div id="newtaskform" class="d-flex w-50 mt-4">
+    <form id="newtaskform" class="d-flex w-50 mt-4">
       <input
         type="text"
         class="me-2"
         id="taskinput"
         placeholder="Add a new task..."
       />
-      <button onclick="addtask()">Add</button>
-    </div>
+      <button onclick="addtask(event)">Add</button>
+    </form>
     <ul id="task-list"></ul>
     <!-- Modal -->
     <div

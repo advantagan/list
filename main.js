@@ -40,7 +40,8 @@ function selectList(listName) {
   displayTaskList();
 }
 
-function addtask() {
+function addtask(e) {
+  e.preventDefault();
   const taskInput = document.getElementById("taskinput");
   const newTask = taskInput.value;
   console.log(newTask, selectedList);
@@ -55,8 +56,23 @@ function displayTaskList() {
   taskList.innerHTML = "";
   for (let task of taskListArray.find((list) => list.name == selectedList)
     .tasks) {
-    taskList.innerHTML += `<li class="list-group-item">${task}</li>`;
+    taskList.innerHTML += `<li class="list-group-item">${task}
+    <span class="mdi mdi-delete-circle" onclick="deleteTask('${task}')"></span>
+    </li>`;
   }
+}
+
+function deleteTask(task) {
+  taskListArray
+    .find((list) => list.name == selectedList)
+    .tasks.splice(
+      taskListArray
+        .find((list) => list.name == selectedList)
+        .tasks.indexOf(task),
+      1
+    );
+  savetaskList();
+  displayTaskList();
 }
 
 loadtaskList();
