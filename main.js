@@ -43,7 +43,7 @@ function selectList(listName) {
 function addtask(e) {
   e.preventDefault();
   const taskInput = document.getElementById("taskinput");
-  const newTask = taskInput.value;
+  let newTask = taskInput.value;
   console.log(newTask, selectedList);
   taskInput.value = "";
   taskListArray.find((list) => list.name == selectedList).tasks.push(newTask);
@@ -54,23 +54,20 @@ function addtask(e) {
 function displayTaskList() {
   const taskList = document.getElementById("task-list");
   taskList.innerHTML = "";
-  for (let task of taskListArray.find((list) => list.name == selectedList)
-    .tasks) {
-    taskList.innerHTML += `<li class="list-group-item">${task}
-    <span class="mdi mdi-delete-circle" onclick="deleteTask('${task}')"></span>
+  const selectedTaskList = taskListArray.find(
+    (list) => list.name == selectedList
+  ).tasks;
+  for (let i = 0; i < selectedTaskList.length; i++) {
+    taskList.innerHTML += `<li class="list-group-item">${selectedTaskList[i]}
+    <span class="mdi mdi-delete-circle" onclick="deleteTask(${i})"></span>
     </li>`;
   }
 }
 
-function deleteTask(task) {
+function deleteTask(taskindex) {
   taskListArray
     .find((list) => list.name == selectedList)
-    .tasks.splice(
-      taskListArray
-        .find((list) => list.name == selectedList)
-        .tasks.indexOf(task),
-      1
-    );
+    .tasks.splice(taskindex, 1);
   savetaskList();
   displayTaskList();
 }
